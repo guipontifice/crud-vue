@@ -22,7 +22,7 @@ const fetchTasks = async () => {
         console.log('funcionou')
     } catch (error) {
         console.log('Erro', error)
-    }g
+    }
 }
 
 const addTask = async () => {
@@ -41,9 +41,12 @@ onMounted(fetchTasks);
 
 
 <template>
-    <div class="">
+    <div class="componentes">
         <ul v-if="tasks.length">
             <li v-for="task in tasks" :key="task.id">{{ task.taskName }}</li>
         </ul>
+
+        <input v-model="newTaskTitle"  placeholder="Nova Tarefa" />
+        <button @click="addTask">Adicionar</button>
     </div>
 </template>
