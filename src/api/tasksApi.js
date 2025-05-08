@@ -7,11 +7,11 @@ export function getAllTasks() {
     return api.get('JWT/GetAllTaskList');
 }
 
-export function createTask(taskTitle) {
-    return api.post('JWT/CreateNewTask', {
-        taskTitle: taskTitle
-    }
+// export function createTask(taskTitle) {
+//     return api.post('JWT/CreateNewTask', {
+//         taskTitle: taskTitle
+//     }
 
-    );
-}
+//     );
+// }
 

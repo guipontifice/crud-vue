@@ -19,13 +19,16 @@ const fetchTasks = async () => {
     try {
         const response = await getAllTasks();
         tasks.value = response.data.data;
+        saveStorage(tasks.value)
         console.log('funcionou')
     } catch (error) {
         console.log('Erro', error)
+        tasks.value = loadStorage();
     }
 }
 
 const addTask = async () => {
+    console.log(newTask.value)
     try {
         await createTask(newTask.title);
         newTask.title = ''
@@ -35,6 +38,14 @@ const addTask = async () => {
     }
 }
 
+function saveStorage(task) {
+    localStorage.setItem("Task", JSON.stringfy(task));
+}
+
+function loadStorage() {
+    const data = localStorage.getItem('Task');
+    return data ? JSON.parse(data) : [];
+}
 onMounted(fetchTasks);
 
 </script>
@@ -45,8 +56,8 @@ onMounted(fetchTasks);
         <ul v-if="tasks.length">
             <li v-for="task in tasks" :key="task.id">{{ task.taskName }}</li>
         </ul>
-
-        <input v-model="newTaskTitle"  placeholder="Nova Tarefa" />
+        <p>{{ newTask }}</p>
+        <input v-model="newTask" placeholder="Nova Tarefa" />
         <button @click="addTask">Adicionar</button>
     </div>
 </template>
